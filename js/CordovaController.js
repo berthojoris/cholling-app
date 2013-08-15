@@ -37,8 +37,7 @@ var CordovaController = {
 	// function, we must explicity call 'app.receivedEvent(...);'
 	onDeviceReady : function() {
 		console.log('Device Ready Received');
-		cb = window.plugins.childBrowser;
-		if (!localStorage.getItem(twitterKey)) {
+		if (!localStorage.getItem(checkLoginKey)) {
 			Lungo.Router.section('login');
 			$$("#logoutBtn").hide();
 		} else {
@@ -46,6 +45,7 @@ var CordovaController = {
 			$$("#logoutBtn").show();
 		}
 
+		cb = window.plugins.childBrowser;
 		if (cb != null) {
 			cb.onLocationChange = function(loc) {
 				CordovaController.locChanged(loc);
@@ -57,22 +57,11 @@ var CordovaController = {
 				CordovaController.onOpenExternal();
 			};
 		}
-		
-		/*FB.init({
-			appId : 'appId',
-			nativeInterface : CDV.FB,
-			useCachedDialogs : false
-		});
-
-		FB.getLoginStatus(handleStatusChange);
-
-		authUser();
-		updateAuthElements();*/
 	},
 
 	onCloseBrowser : function() {
-		console.log("onCloseBrowser!");
 		Lungo.Notification.hide();
+		console.log("onCloseBrowser!");
 	},
 
 	locChanged : function(loc) {
