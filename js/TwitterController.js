@@ -35,7 +35,7 @@ var TwitterController = {
 		},
 		success : function(loc) {
 			console.log('EVE: success with loc: ' + loc);
-			if (loc.indexOf("http://www.cholling.es/socialLogin/registerTwitter.php") >= 0) {
+			if (loc.indexOf(configTwitter.callbackUrl) >= 0) {
 				if (loc.indexOf('denied') > 0) {
 					var accessData = {};
 					accessData.status = 0;
